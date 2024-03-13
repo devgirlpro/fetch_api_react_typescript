@@ -1,0 +1,24 @@
+/* Style the table */
+table {
+    border-collapse: collapse; /* Remove default table border spacing */
+    width: 100%; /* Make table fill available width */
+    margin: 0 auto; /* Center table horizontally */
+  }
+  
+  /* Style the table header */
+  thead {
+    background-color: #f2f2f2; /* Light gray background for header */
+  }
+  
+  /* Style table header cells (<th>) */
+  th {
+    padding: 10px; /* Add padding to header cells */
+    text-align: center; /* Left-align header text */
+    border: 1px solid #ddd; /* Add thin border to header cells */
+  }
+  
+  /* Style table body cells (<td>) */
+  td {
+    padding: 5px; /* Add padding to body cells */
+    border: 1px solid #ddd; /* Add thin border to body cells */
+  }
