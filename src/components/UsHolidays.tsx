@@ -18,19 +18,19 @@ const UsHolidays = (): React.ReactElement => {
 
   //1- fetching api data using async await
 
-  // const fetchApi = async () => {
-  //   try {
-  //     const response = await fetch(apiLink);
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! status: ${response.status}`);
-  //     }
+  const fetchApi = async () => {
+    try {
+      const response = await fetch(apiLink);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-  //     const data = await response.json();
-  //     setApiData(data);
-  //   } catch (error) {
-  //     console.log('Something went Wrong !', error);
-  //   }
-  // };
+      const data = await response.json();
+      setApiData(data);
+    } catch (error) {
+      console.log('Something went Wrong !', error);
+    }
+  };
 
   //2- fetching api data using axios
   //regular synchronous function using promises for handling asynchronouse operation
@@ -64,23 +64,23 @@ const UsHolidays = (): React.ReactElement => {
   // }
 
   //4- fetch api using PROMISES
-const fetchApi = () => {
-  fetch(apiLink)
-  .then((response) => {
-    if(!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
-    return response.json();
-  })
 
-  .then((data) => {
-    setApiData(data)
-  })
-  .catch((error) => {
-    console.log("No data found", Error)
-  })
-}
+  // const fetchApi = () => {
+  //   fetch(apiLink)
+  //   .then((response) => {
+  //     if(!response.ok) {
+  //       throw new Error(`HTTP error! status: ${response.status}`)
+  //     }
+  //     return response.json();
+  //   })
 
+  //   .then((data) => {
+  //     setApiData(data)
+  //   })
+  //   .catch((error) => {
+  //     console.log("No data found", Error)
+  //   })
+  // }
 
   //changing date format
   const formatDate = (
