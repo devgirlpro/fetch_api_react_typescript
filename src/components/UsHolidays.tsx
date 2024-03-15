@@ -1,6 +1,6 @@
 import { info } from 'console';
 import './style.css';
-
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { apiLink } from '../api_links';
 interface apiProps {
@@ -16,19 +16,33 @@ const UsHolidays = (): React.ReactElement  => {
     fetchApi();
   }, []);
 
-  //fetching api using async await
-  const fetchApi = async () => {
-    try {
-      const response = await fetch(apiLink);
-      const data = await response.json();
-      setApiData(data);
-    } catch (error) {
-      console.log('Something went Wrong !', error);
-    }
-  };
+  //fetching api data using async await
+  // const fetchApi = async () => {
+  //   try {
+  //     const response = await fetch(apiLink);
+  //     const data = await response.json();
+  //     setApiData(data);
+  //     //console.log(data)
+  //   } catch (error) {
+  //     console.log('Something went Wrong !', error);
+  //   }
+  // };
+
+//fetching api data using axios
+//regular synchronous function using promises for handling asynchronouse operation
+const fetchApi = () => {
+  axios.get(apiLink)
+  .then((response) => {
+    const data = response.data;
+    setApiData(data)
+  })
+  .catch((error) => {
+  console.log("something went wrog!", error)
+  })
+}
 
   //changing date format 
-  const formatDate = (dateString: string, outputFormat = 'MM-DD-YYYY'): string => {
+  const formatDate = (dateString: string, outputFormat = 'DD-MM-YYYY'): string => {
     try {
       // Parse the date string using Date constructor
       const parsedDate = new Date(dateString);
@@ -39,7 +53,7 @@ const UsHolidays = (): React.ReactElement  => {
       }
   
       // Format the date using toLocaleDateString with desired format
-      return parsedDate.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+      return parsedDate.toLocaleDateString("en-UK", { day: 'numeric', month: 'short', year: 'numeric' });
     } catch (error) {
       console.error('Error formatting date:', error);
       // Handle invalid date string (optional: return an empty string or default value)
