@@ -16,7 +16,8 @@ const UsHolidays = (): React.ReactElement => {
     fetchApi();
   }, []);
 
-  //fetching api data using async await
+  //1- fetching api data using async await
+
   // const fetchApi = async () => {
   //   try {
   //     const response = await fetch(apiLink);
@@ -31,7 +32,7 @@ const UsHolidays = (): React.ReactElement => {
   //   }
   // };
 
-  //fetching api data using axios
+  //2- fetching api data using axios
   //regular synchronous function using promises for handling asynchronouse operation
 
   // const fetchApi = () => {
@@ -45,21 +46,41 @@ const UsHolidays = (): React.ReactElement => {
   //   })
   // }
 
-  //axios try catch method
-  const fetchApi = async () => {
-    try {
-      const response = await axios.get(apiLink)
+  //3- axios try catch method
 
-      if(!response.status || response.status !== 200) {
-        throw  new Error(`HTTP error! status: ${response.status}`)
-      }
+  // const fetchApi = async () => {
+  //   try {
+  //     const response = await axios.get(apiLink)
 
-      const data = response.data;
-      setApiData(data)
-    } catch (error) {
-      console.log('Error fetching data:', error)
+  //     if(!response.status || response.status !== 200) {
+  //       throw  new Error(`HTTP error! status: ${response.status}`)
+  //     }
+
+  //     const data = response.data;
+  //     setApiData(data)
+  //   } catch (error) {
+  //     console.log('Error fetching data:', error)
+  //   }
+  // }
+
+  //4- fetch api using PROMISES
+const fetchApi = () => {
+  fetch(apiLink)
+  .then((response) => {
+    if(!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
     }
-  }
+    return response.json();
+  })
+
+  .then((data) => {
+    setApiData(data)
+  })
+  .catch((error) => {
+    console.log("No data found", Error)
+  })
+}
+
 
   //changing date format
   const formatDate = (
